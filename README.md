@@ -1,5 +1,14 @@
 # Video_ZeromqPublisher.cpp
+This C++ code is a program that captures video frames from a camera and publishes them over a ZeroMQ (ZMQ) publisher socket. 
+Here's a breakdown of what the code does: 
+1. The program includes the necessary header files: `<iostream>` for input/output operations, `<opencv2/opencv.hpp>` for OpenCV library functions, and `<zmq.hpp>` for ZeroMQ library functions.
+2. The `main()` function is the entry point of the program.
+3. Inside the `main()`, the program initializes a ZeroMQ context and creates a ZMQ publisher socket. The publisher socket is bound to the TCP address `tcp://*:5555`, which means it will listen for incoming connections on all available network interfaces on port 5555.
+4. The program then opens a video capture device, typically the default camera (index 0). If the camera cannot be opened, an error message is printed, and the program exits. 5. The program enters a loop that continuously captures frames from the camera using the `cap >> frame` operation, which stores the captured frame in the `frame` variable.
+6. Inside the loop, the program serializes the captured frame to a binary format using the OpenCV `imencode()` function, which encodes the frame as a JPEG image and stores it in the `buffer` vector.
+7. The program then creates a ZMQ message object `message` and copies the contents of the `buffer` vector into the message. Finally, the program sends the message over the ZMQ publisher socket using the `publisher.send()` function.
 
+In summary, this program captures video frames from a camera, encodes them as JPEG images, and publishes them over a ZMQ publisher socket, allowing other applications to receive and process the video stream.
 
 
 # Video_ZeromqSubscriber.cpp
