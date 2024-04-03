@@ -10,6 +10,8 @@ Here's a breakdown of what the code does:
 
 In summary, this program captures video frames from a camera, encodes them as JPEG images, and publishes them over a ZMQ publisher socket, allowing other applications to receive and process the video stream.
 
+# Command for Compiling the Program
+g++ Video_ZeromqPublisher.cpp `pkg-config --cflags --libs opencv4` -lpaho-mqttpp3 -lpaho-mqtt3as - o Video_ZeromqPublisher -L/usr/local/lib -lzmq
 
 # Video_ZeromqSubscriber.cpp
 This C++ code is a program that receives video frames from a ZeroMQ (Zero Message Queue) subscriber socket and displays them in an OpenCV window. 
@@ -26,3 +28,6 @@ Here's a breakdown of what the code does:
 10. The program displays the video frame in the "Video Frame" window using the `cv::imshow()` function.
 11. Finally, the program waits for a key press using `cv::waitKey(1)`, and if the "Esc" key is pressed, the loop is exited.
 12. The program returns 0 to indicate successful execution. In summary, this code sets up a ZeroMQ subscriber to receive video frames and displays them in an OpenCV window, allowing the user to view the incoming video stream.
+
+# Command for Compiling the Program
+g++ Video_ZeromqSubscriber.cpp `pkg-config --cflags --libs opencv4` -lpaho-mqttpp3 -lpaho-mqtt3as - o Video_ZeromqSubscriber -L/usr/local/lib -lzmq
